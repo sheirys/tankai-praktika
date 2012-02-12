@@ -1,0 +1,10 @@
+data/img/0.png null
+data/img/1.png tree
+data/img/2.png 2
+data/img/3.png 3
+data/img/4.png 4 
+data/img/5.png 5
+data/img/6.png 6
+data/img/7.png 7
+data/img/tankas.png 8
+data/img/tankas2.png 9
