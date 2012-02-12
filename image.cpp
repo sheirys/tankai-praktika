@@ -18,7 +18,7 @@ bool img::load( string filename )
 	SDL_Surface* optimizedImage = NULL;
 	loadedImage = IMG_Load( filename.c_str() );
 
-	cout << "\tLoading \"" << filename << "\"\t\t" << loadedImage << "\t\"" << id << "\"\n";
+	cout << "\tLoading \"" << filename << "\"\t" << loadedImage << " as\t\"" << id << "\"\n";
 
 	if( loadedImage != NULL )
 	{

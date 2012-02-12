@@ -17,7 +17,7 @@ class network {
 		char* listen(); //Klausom ir grazinam teksta
 		void send(char*); //siunciam teksta
 		void send(); // siunciam savo info
-		void hello();
+		bool hello();
 		void disconnect();
 		int tankas_x;
 		int tankas_y;
