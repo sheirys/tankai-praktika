@@ -5,6 +5,7 @@
 
 using namespace std;
 
+Timer frames;
 
 Core::Core()
 {
@@ -21,7 +22,7 @@ Core::Core()
             pav=pav +"00"+ss.str()+".png";
          else
         pav=pav+"0"+ss.str()+".png";
-
+	cout << "Kraunam " << pav << "\n";
     Tempp = IMG_Load(pav.c_str());
     if(Tempp != NULL)
     {
@@ -176,17 +177,18 @@ int Core::run()
 }
 int main(int argc, char* argv[])
 {
-   freopen("CON", "w", stdout);
+   //freopen("CON", "w", stdout);
 
-    freopen("CON", "w", stderr);
+    //freopen("CON", "w", stderr);
    //Core P;
    // return P.run();
   //  P.Vykdyti();
 
-
+	cout << "Zdarowa!\n";
     Engine game;
 
      game.Init( "Pre-alpha edition!" );
+     cout << "kazkas buvo\n";
      game.ChangeState( Intro::Instance() );
 
 
@@ -195,7 +197,7 @@ int main(int argc, char* argv[])
 		game.HandleEvents();
 		game.Update();
 		game.Draw();
-		SDL_Delay(10);
+		frames.delay(30);
 	}
     return 0;
 }

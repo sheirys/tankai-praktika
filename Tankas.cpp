@@ -96,11 +96,11 @@ void Tankas::Inicijuoti()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 );
-    Tanks = Load::load_img("data/img/tankas.png");
-    Patranka = Load::load_img("data/img/Patranka.png");
-    TankasStovi   = Mix_LoadWAV( "data/sound/1.wav" );
-    TankasVaziuoja= Mix_LoadWAV( "data/sound/2.wav" );
-    TankasStoja   = Mix_LoadWAV( "data/sound/3.wav" );
+    Tanks = Load::load_img("tankas.png");
+    Patranka = Load::load_img("Patranka.png");
+    TankasStovi   = Mix_LoadWAV( "1.wav" );
+    TankasVaziuoja= Mix_LoadWAV( "2.wav" );
+    TankasStoja   = Mix_LoadWAV( "3.wav" );
 
     //----------------------------------------
 
@@ -117,7 +117,7 @@ void Tankas::Inicijuoti()
             pav=pav +"00"+ss.str()+".png";
          else
             pav=pav+"0"+ss.str()+".png";
-
+	cout << "\tKraunam " << pav << "\n";
     temp = IMG_Load(pav.c_str());
 
     if(temp != NULL)
@@ -131,7 +131,9 @@ void Tankas::atnaujinti(int xp, int yp, vector<Kulka*> &kulkos)
 {
     if(sprogsta)
     {
+
         Sprogimas();
+
         return;
     }
     int dx, dy;
@@ -143,7 +145,7 @@ void Tankas::atnaujinti(int xp, int yp, vector<Kulka*> &kulkos)
     pk = vk - kampas + 90;
 
 //    if( kulkos != NULL )
-    {
+    //{
             int i = 0;
             while(i < kulkos.size())
             {
@@ -158,7 +160,7 @@ void Tankas::atnaujinti(int xp, int yp, vector<Kulka*> &kulkos)
                 }
                 i++;
             }
-    }
+           // }
 
 
 
@@ -178,9 +180,8 @@ void Tankas::atnaujinti(int xp, int yp, vector<Kulka*> &kulkos)
     Tm = SDL_DisplayFormatAlpha( ND );
 
     std::swap(Tm, ND);
-
+	//delete(ND);
     SDL_FreeSurface(ND);
-    delete(ND);
 //-----------------------------------------------------------------------------
 
     Tn =  rotozoomSurfaceXY(Patranka, pk, 1, 1, 0);
@@ -191,15 +192,16 @@ void Tankas::atnaujinti(int xp, int yp, vector<Kulka*> &kulkos)
     dst.y = ( Tanks->h - Tn->h ) / 2;
 
     SDL_BlitSurface(Tn, NULL, Tm, &dst);
-
+	//delete(Tn);
     SDL_FreeSurface(Tn);
-    delete(Tn);
+
+    
 
     SDL_FreeSurface(rotation);
     rotation = rotozoomSurface(Tm, kampas, 0.45, 0);
 
+	//delete(Tm);
     SDL_FreeSurface(Tm);
-    delete(Tm);
 
     Uint32 colorkey = SDL_MapRGB( rotation->format, 0, 255, 0 );
     SDL_SetColorKey( rotation, SDL_SRCCOLORKEY, colorkey );
@@ -207,9 +209,8 @@ void Tankas::atnaujinti(int xp, int yp, vector<Kulka*> &kulkos)
     SDL_Surface * www = new SDL_Surface;
     www = SDL_DisplayFormatAlpha(rotation);
     std::swap(www, rotation);
+    //delete(www);
     SDL_FreeSurface(www);
-    delete(www);
-
 
     senas_kampas = kampas;
     senas_kampasP = pk;

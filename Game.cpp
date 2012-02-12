@@ -4,18 +4,16 @@ Game Game::m_PlayState;
 
 void Game::Init()
 {
+	cout << "Game Init\n";
     kiekP= 0;
+    cout << "Kraunam paveiksliukus\n";
     data.load_images("data.txt");
+    cout << "Kraunam mapa\n";
     data.load_map("test.map");
 
 
-    net.init("192.168.43.208",5151);
+    net.init("localhost",5151);
     net.hello();
-
-
-	SDL_Surface* temp = images.GetImage("play.bmp");
-	bg = SDL_DisplayFormat(temp);
-	SDL_FreeSurface(temp);
 
 	upup=true;
     updw=true;
@@ -210,7 +208,7 @@ if(D.RT.size()> 0 )
 
         for(int j = 0; j<tankai.size(); j++)
         {
-            cout<<"Tanko ID: "<<tankai[j]->GetID()<<"Gautas ID: "<<D.RT[i]->ID<<endl;
+            cout<<"Tanko ID: "<<tankai[j]->GetID()<<" Gautas ID: "<<D.RT[i]->ID<<endl;
             if(tankai[j]->GetID() == D.RT[i]->ID)
                 {
                     tankai[j]->SendXY(D.RT[i]->X, D.RT[i]->Y);
@@ -227,17 +225,6 @@ if(D.RT.size()> 0 )
    // Xg = D.RT[0]->X;
     //Xg = D.RT[0]->Y;
 }
- if(D.RT.size()>1)
- {
-     Xg = D.RT[0]->X;
-     Yg = D.RT[0]->Y;
-
-     Xg1 = D.RT[1]->X;
-     //cout<<"ID: "<<D.RT[1]->ID<<endl;
-    // cout<<"X1: "<<Xg1<<endl;
-     Yg1 = D.RT[1]->Y;
-     //cout<<"Y1: "<<Yg1<<endl;
- }
 
 /*string kiekT;//kiek tanku
 
@@ -321,6 +308,7 @@ cout<<"X koordinate: "<<Xgautas <<". Y koordinate: "<<Ygautas<<"."<<endl;
 
 //-------------------------------------
 /*Atnaujiname visus tankus*/
+
     tmp = tankai.size();
     if(tmp!=0)
     for(int i = 0; i < tmp; i++)
@@ -330,11 +318,13 @@ cout<<"X koordinate: "<<Xgautas <<". Y koordinate: "<<Ygautas<<"."<<endl;
     }
 
 
+    tmp = tankai.size();
     if(tmp!=0)
     for(int i = 0; i < tmp; i++)
     {
         tankai[i]->atnaujinti(px, py, kulkos);
     }
+
     //tankai[1]->atnaujinti(Xg, Ygautas, kulkos);
    //tankai[1]->atnaujinti(700, 350, kulkos);
   /*
@@ -365,6 +355,7 @@ cout<<"X koordinate: "<<Xgautas <<". Y koordinate: "<<Ygautas<<"."<<endl;
             }
 
     }
+
 //-------------------------------------
 if(!upup)
     {
