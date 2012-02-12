@@ -36,14 +36,20 @@ void network::disconnect() {
 	
 }
 
-bool network::hello() {
+void network::hello() {
 
 	cout << "\tSveikinames su serveriu...\n";
 	char* answer = "";
-	char* buffer = "";
 	int number = -1;
-	int nepavyko = 0;
 	
+	
+	send("hello");
+	SDL_Delay(WAIT_ANSWER);
+	
+	// ziurim ka atsake serveris
+	answer = listen();
+
+/*	
 	do {
 		cout << "\tBandom jungtis " << nepavyko << " karta\n";
 		send("hello");
@@ -54,16 +60,13 @@ bool network::hello() {
 			nepavyko++;
 		}
 	} while ( (answer == "") && (nepavyko < BANDYMAI_PRISIJUNGTI ));
-	
+*/
+	// paverciam i skaiciu atsakyma
 	number = atoi(answer);
+	// ta skaiciu perduodam i klase, ji bus musu ID
 	nr = number;
-	if( number > 0 ) {
-		cout << "\tGautas id: " << nr << "\n";
-		return true;
-	} else {
-		cout << "\tTavo id yra: " << nr << " ,netinkamas vartojimui\n";
-		return false;
-	}
+	
+	cout << "\tTavo ID : " << nr << "\n";
 
 }
 
