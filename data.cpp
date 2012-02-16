@@ -9,19 +9,25 @@
 using namespace std;
 
 SDL_Surface* data_loader::getImg( char* id) {
+	// sita surfeisa grazinsim
 	SDL_Surface* temp = NULL;
 
+	//sukam cikla pro visus data.images...
 	for (int i=0; i< images.size(); i++) {
+		//...ir jei radom toki kokio prasom...
 		if ( id == images[i].id ) {
+			//...mes ji grazinsim
 			temp = images[i].IMG;
 		}
 	}
 	
 	// jei neradom tokio paveikslelio
 	if ( temp == NULL ) {
+		//grazinam paveiksliuka kuris yra data_loader.error
 		return error;
 	} 
 	
+	// jei viskas gerai neturetumem gaut NULL
 	return temp;
 
 }
@@ -34,18 +40,17 @@ SDL_Surface* data_loader::load_IMG(string filename)
 
 	if( loadedImage != NULL )
 	{
-
-        	return loadedImage;
+		optimizedImage = SDL_DisplayFormatAlpha(loadedImage);
+        	SDL_FreeSurface(loadedImage);
     	}
     	else
     	{
     		cout << "[!]\tError while loading \"" << filename << "\"\n";
     		cout << "\t" << IMG_GetError() << "\n";
 
-    		return loadedImage;
     	}
-
-	return false;
+	//return loadedImage;
+	return optimizedImage;
 }
 
 // tikrinam ar galim vaziuot i x,y koordinates
@@ -81,6 +86,9 @@ bool data_loader::move( int x, int y ) {
 
 void data_loader::load_images( char* filename ) {
 
+	cout << "\tdata::error ikraunamas error.bmp\n";
+	error = load_IMG("data/img/error.bmp");
+
 	string line;
  	img image;
 
@@ -95,19 +103,12 @@ void data_loader::load_images( char* filename ) {
 		data_file >> image.id;
 		
 		// kraunam paveiksliuka
-		image.load(image.filename);
+		image.IMG = load_IMG(image.filename);
 		
 		// keliam visa paveiksliuka i vektoriu
 		images.push_back( image );
 	}
 	
-//	while( getline( data_file, line ) ) {
-//		if( image.load(line) ) {
-//			image.filename = line;
-//			images.push_back( image );
-//		}
-
-//	}
 	cout << "\n\tTotal loaded images: " << images.size() << "\n";
 }
 
@@ -223,5 +224,5 @@ void data_loader::apply_surface( int x, int y, SDL_Surface* source, SDL_Surface*
 }
 
 data_loader::data_loader() {
-	error = load_IMG("data/img/error.bmp");
+
 }

@@ -10,8 +10,6 @@ Tankas::Tankas(data_loader &data, int id, int x , int y, double angle)
     
     Tanks = data.getImg("tankas");
     Patranka = data.getImg("patranka");
-    //Tanks = Load::load_img("data/img/tankas.png");
-    //Patranka = Load::load_img("data/img/Patranka.png");
 
     X=x;
     Y=y;

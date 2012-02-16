@@ -1,6 +1,7 @@
 #include <fstream>
 #include <vector>
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
 #include <string>
 
 #include "image.h"
@@ -12,7 +13,7 @@ const int tiles = 32;
 
 class data_loader {
 	public:
-		void getImg( char* id, SDL_Surface* surface );
+		SDL_Surface* getImg( char* id);
 		void load_images( char* filename );
 		void load_options( char* filename );
 		void load_map( char* filename );
@@ -24,6 +25,10 @@ class data_loader {
 		vector<img> images;
 		int size_x,size_y,layers;
 		SDL_Surface* Map;
+		SDL_Surface* load_IMG(string filename);
+		
+		// cia saugosim error paveiksliuka
+		SDL_Surface* error;
 
 	private:
 		ifstream options_file;

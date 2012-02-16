@@ -6,7 +6,7 @@
 #include "image.h"
 
 using namespace std;
-/*
+
 void img::SetSurface( SDL_Surface* surface ) 
 {
 	IMG = surface;	
@@ -36,4 +36,3 @@ bool img::load( string filename )
 
 	return false;
 }
-*/

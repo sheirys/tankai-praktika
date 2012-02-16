@@ -11,7 +11,7 @@ class img {
 		string filename;
 		SDL_Surface* IMG;
 		
-        	//bool load( string filename );
-        	//void SetSurface( SDL_Surface* surface );
+        	bool load( string filename );
+        	void SetSurface( SDL_Surface* surface );
 		
 };
