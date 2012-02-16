@@ -8,15 +8,44 @@
 
 using namespace std;
 
-void data_loader::getImg( char* id, SDL_Surface* destination) {
+SDL_Surface* data_loader::getImg( char* id) {
+	SDL_Surface* temp = NULL;
 
 	for (int i=0; i< images.size(); i++) {
 		if ( id == images[i].id ) {
-			apply_surface(0, 0, images[i].IMG, destination, NULL);
-			cout << "data::getImg grazinam \"" << images[i].filename << "\"\n";
+			temp = images[i].IMG;
 		}
 	}
+	
+	// jei neradom tokio paveikslelio
+	if ( temp == NULL ) {
+		return error;
+	} 
+	
+	return temp;
 
+}
+
+SDL_Surface* data_loader::load_IMG(string filename)
+{
+	SDL_Surface* loadedImage = NULL;
+	SDL_Surface* optimizedImage = NULL;
+	loadedImage = IMG_Load( filename.c_str() );
+
+	if( loadedImage != NULL )
+	{
+
+        	return loadedImage;
+    	}
+    	else
+    	{
+    		cout << "[!]\tError while loading \"" << filename << "\"\n";
+    		cout << "\t" << IMG_GetError() << "\n";
+
+    		return loadedImage;
+    	}
+
+	return false;
 }
 
 // tikrinam ar galim vaziuot i x,y koordinates
@@ -194,5 +223,5 @@ void data_loader::apply_surface( int x, int y, SDL_Surface* source, SDL_Surface*
 }
 
 data_loader::data_loader() {
-
+	error = load_IMG("data/img/error.bmp");
 }

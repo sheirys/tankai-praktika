@@ -7,6 +7,11 @@ Tankas::Tankas(data_loader &data, int id, int x , int y, double angle)
     sprogsta = false;
     gyvybe=100;
     Kuris_kadras=0;
+    
+    Tanks = data.getImg("tankas");
+    Patranka = data.getImg("patranka");
+    //Tanks = Load::load_img("data/img/tankas.png");
+    //Patranka = Load::load_img("data/img/Patranka.png");
 
     X=x;
     Y=y;
@@ -96,8 +101,8 @@ void Tankas::Inicijuoti()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 );
-    Tanks = Load::load_img("data/img/tankas.png");
-    Patranka = Load::load_img("data/img/Patranka.png");
+    //Tanks = Load::load_img("data/img/tankas.png");
+    //Patranka = Load::load_img("data/img/Patranka.png");
     //TankasStovi   = Mix_LoadWAV( "1.wav" );
     //TankasVaziuoja= Mix_LoadWAV( "2.wav" );
     //TankasStoja   = Mix_LoadWAV( "3.wav" );
