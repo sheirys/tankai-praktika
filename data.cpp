@@ -8,9 +8,14 @@
 
 using namespace std;
 
-void data_loader::getImg( char* id, SDL_Surface* surface) {
+void data_loader::getImg( char* id, SDL_Surface* destination) {
 
-
+	for (int i=0; i< images.size(); i++) {
+		if ( id == images[i].id ) {
+			apply_surface(0, 0, images[i].IMG, destination, NULL);
+			cout << "data::getImg grazinam \"" << images[i].filename << "\"\n";
+		}
+	}
 
 }
 
