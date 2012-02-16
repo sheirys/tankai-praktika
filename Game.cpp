@@ -7,14 +7,15 @@ void Game::Init()
     //kiekP= 0;
     data.load_images("data.txt");
     data.load_map("test.map");
+    data.load_options("options.txt");
 
 
-    net.init("192.168.43.208",5151);
+    net.init((char*)data.options.host.c_str(),5151);
     net.hello();
 
 
 
-	upup=true;
+    upup=true;
     updw=true;
     upka=true;
     upde=true;
