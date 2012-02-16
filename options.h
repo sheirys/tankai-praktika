@@ -1,3 +1,4 @@
+#include <string>
 class opt {
 	public:
 		// ekrano parametrai
@@ -6,6 +7,6 @@ class opt {
 		int height;
 		
 		// tinklo parametrai
-		char* host;
+		std::string host;
 		int port;
 };

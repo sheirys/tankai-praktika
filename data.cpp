@@ -125,9 +125,9 @@ void data_loader::load_options( char* filename ) {
 		options_file >> options.height;
 		cout << "\t\tHeight:\t" << options.height << "\n";
 		options_file >> options.host;
-		//cout << "\t\tHost:\t" << options.host << "\n";
-		//options_file >> options.port;
-		//cout << "\t\tPort:\t" << options.port << "\n";
+		cout << "\t\tHost:\t" << options.host << "\n";
+		options_file >> options.port;
+		cout << "\t\tPort:\t" << options.port << "\n";
 		 
 	} else {
 		cout << "\tUsing defaults:\n";
