@@ -2,7 +2,7 @@
 #include "Intro.h"
 #include "Timer.h"
 
-#define FRAMES_PER_SECOND 10
+#define FRAMES_PER_SECOND 100
 
 int main(int argc, char* argv[])
 {
