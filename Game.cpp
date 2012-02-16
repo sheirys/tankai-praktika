@@ -64,7 +64,7 @@ void Game::Resume()
 
 void Game::HandleEvents(Engine* game)
 {
-    //kiekP++;
+    kiekP++;
     //std::ostringstream temp;
     //temp<<kiekP;
 
@@ -73,7 +73,7 @@ void Game::HandleEvents(Engine* game)
    // net.send((char*)temp1.c_str());
 	SDL_Event event;
 
-	if (SDL_PollEvent(&event))
+	while(SDL_PollEvent(&event))
 	{
 
 		switch (event.type)
@@ -83,13 +83,6 @@ void Game::HandleEvents(Engine* game)
                 		net.disconnect();
 				game->Quit();
 				break;
-			}
-
-			case SDL_MOUSEMOTION:
-			{
-				px = event.motion.x;
-                		py = event.motion.y;
-                		break;
 			}
 
 			case SDL_MOUSEBUTTONDOWN:
@@ -188,6 +181,13 @@ void Game::HandleEvents(Engine* game)
                 		}
                 		break;
                 	}
+                	
+			case SDL_MOUSEMOTION:
+			{
+				px = event.motion.x;
+                		py = event.motion.y;
+                		break;
+			}
                 	
 		}
 	}
