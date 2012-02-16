@@ -4,7 +4,7 @@ Game Game::m_PlayState;
 
 void Game::Init()
 {
-    kiekP= 0;
+    //kiekP= 0;
     data.load_images("data.txt");
     data.load_map("test.map");
 
@@ -64,7 +64,7 @@ void Game::Resume()
 
 void Game::HandleEvents(Engine* game)
 {
-    kiekP++;
+    //kiekP++;
     //std::ostringstream temp;
     //temp<<kiekP;
 
@@ -74,100 +74,121 @@ void Game::HandleEvents(Engine* game)
 	SDL_Event event;
 
 	if (SDL_PollEvent(&event))
-	 {
+	{
 
 		switch (event.type)
 		{
 			case SDL_QUIT:
 			{
-                net.disconnect();
+                		net.disconnect();
 				game->Quit();
 				break;
 			}
 
 			case SDL_MOUSEMOTION:
 			{
-			    px = event.motion.x;
-                py = event.motion.y;
-                break;
+				px = event.motion.x;
+                		py = event.motion.y;
+                		break;
 			}
 
 			case SDL_MOUSEBUTTONDOWN:
 			{
-			    if (event.button.button == (SDL_BUTTON_LEFT))
-               {
-                   Kulka*  blt = NULL;
-                   //blt = new Kulka(  tankai[0]->getX()+ tankai[0]->rotation->w/2 + 20    ,tankai[0]->getY()+ tankai[0]->rotation->h/2 + 25, tankai[0]->GetAngle());
-                   blt = new Kulka(  tankai[0]->getX()+ tankai[0]->rotation->w/2 + 20+100    ,tankai[0]->getY()+ tankai[0]->rotation->h/2 + 25+100, tankai[0]->GetAngle());
-                   kulkos.push_back(blt);
-                   break;
-               }
+				if (event.button.button == (SDL_BUTTON_LEFT))
+				{
+                  			Kulka*  blt = NULL;
+                   			/*
+                   			blt = new Kulka(
+                   				tankai[0]->getX()+ tankai[0]->rotation->w/2 + 20,
+                   				tankai[0]->getY()+ tankai[0]->rotation->h/2 + 25,
+                   				tankai[0]->GetAngle()
+                   				);
+                   			*/
+                   			
+                   			blt = new Kulka(
+                   				tankai[0]->getX()+ tankai[0]->rotation->w/2 + 20+100,
+                   				tankai[0]->getY()+ tankai[0]->rotation->h/2 + 25+100,
+                   				tankai[0]->GetAngle()
+                   				);
+                   				
+                   			kulkos.push_back(blt);
+               			}
+               			break;
 			}
 
 			case SDL_KEYDOWN:
+			{
 				switch (event.key.keysym.sym)
 				 {
 					case SDLK_ESCAPE:
-                        net.disconnect();
+					{
+                        			net.disconnect();
 						game->Quit();
 						break;
+					}
 
 					case SDLK_m:
+					{
 						game-> PushState( Meniu::Instance() );
 						break;
+					}
 
 					case SDLK_UP:
 					{
-					    upup=false; //nurodome kad mygtukas aukstyn yra nuspaustas
-					    break;
+					    	upup=false; //nurodome kad mygtukas aukstyn yra nuspaustas
+					    	break;
 					}
 					case SDLK_DOWN:
 					{
-					    updw = false;
-					    break;
+						updw = false;
+					    	break;
 					}
 
 					case SDLK_LEFT:
 					{
-					    upka=false;
-					    break;
+					    	upka=false;
+					    	break;
 					}
 					case SDLK_RIGHT:
 					{
-					    upde=false;
-					    break;
+					    	upde=false;
+					    	break;
 					}
+					break;
 				}
-				break;
+			}
 
-             case SDL_KEYUP:
-                switch (event.key.keysym.sym)
-                {
-                     case SDLK_UP:
-                    {
-                        upup=true;
-                        break;
-                    }
+             		case SDL_KEYUP:
+             		{
+                		switch (event.key.keysym.sym)
+                		{
+                     			case SDLK_UP:
+				    	{
+				        	upup=true;
+				        	break;
+				    	}
 
-                    case SDLK_DOWN:
-                    {
-                        updw=true;
-                        break;
-                    }
+                    			case SDLK_DOWN:
+                    			{
+                        			updw=true;
+                        			break;
+                    			}
 
-                    case SDLK_LEFT:
-                    {
-                        upka=true;
-                        break;
-                    }
+                    			case SDLK_LEFT:
+                    			{
+                        			upka=true;
+                        			break;
+                    			}
 
-                    case SDLK_RIGHT:
-                    {
-                        upde=true;
-                        break;
-                    }
-                }
-                break;
+                    			case SDLK_RIGHT:
+                    			{
+                        			upde=true;
+                        			break;
+                    			}
+                		}
+                		break;
+                	}
+                	
 		}
 	}
 }
