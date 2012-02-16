@@ -17,7 +17,7 @@ void Intro::Init()
     if(!IntroMusic)
         std::cout<<Mix_GetError()<<std::endl;
 
-	SDL_Surface* temp = SDL_LoadBMP("intro.bmp");
+	SDL_Surface* temp = SDL_LoadBMP("data/img/intro.bmp");
 
 	bg = SDL_DisplayFormat(temp);
 

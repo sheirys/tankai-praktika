@@ -4,7 +4,7 @@
  #include <string>
  #include <sstream>
  #include "ImageLoader.h"
- #include <SDL/SDL_image.h>
+ #include "SDL/SDL_image.h"
 
 using namespace std;
 struct Vieta

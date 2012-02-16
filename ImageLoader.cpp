@@ -10,7 +10,8 @@ SDL_Surface* ImageLoader::GetImage(string file)
             i = IMG_List.insert(i, make_pair(file, surf));
         else
             {
-                cerr<<"Nepavyko uzkrauti '"<<file<<"'failo."<<endl;
+                cout<<"Nepavyko uzkrauti '"<<file<<"'failo."<<endl;
+                exit(111);
             }
     }
     return i->second;

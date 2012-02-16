@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "CLoad_image.h"
-
 void Game::Draw(Engine* game)
 {
     SDL_FillRect( game->screen, &game->screen->clip_rect, SDL_MapRGB( game->screen->format, 0, 0, 0 ) );

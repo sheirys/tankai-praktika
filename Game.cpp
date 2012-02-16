@@ -4,16 +4,15 @@ Game Game::m_PlayState;
 
 void Game::Init()
 {
-	cout << "Game Init\n";
     kiekP= 0;
-    cout << "Kraunam paveiksliukus\n";
     data.load_images("data.txt");
-    cout << "Kraunam mapa\n";
     data.load_map("test.map");
 
 
-    net.init("localhost",5151);
+    net.init("192.168.43.208",5151);
     net.hello();
+
+
 
 	upup=true;
     updw=true;
@@ -25,24 +24,24 @@ void Game::Init()
     Animacija(images);
 
     Tankas* tk= NULL;
-    tk = new Tankas();
+    tk = new Tankas(data, 0, 400, 300);
     tankai.push_back(tk);
 
     Tankas* tk1= NULL;
-    tk1 = new Tankas(1, 400, 300);
+    tk1 = new Tankas(data, 1, 400, 300);
     tankai.push_back(tk1);
 
 
     Tankas* tk2= NULL;
-    tk2 = new Tankas(2, 650,200);
+    tk2 = new Tankas(data, 2, 650,200);
     tankai.push_back(tk2);
 
     Tankas* tk3= NULL;
-    tk3 = new Tankas(3, 300,100);
+    tk3 = new Tankas(data, 3, 300,100);
     tankai.push_back(tk3);
 
     Tankas* tk4= NULL;
-    tk4 = new Tankas(4, 400,100);
+    tk4 = new Tankas(data, 4, 400,100);
     tankai.push_back(tk4);
 
 }
@@ -109,6 +108,7 @@ void Game::HandleEvents(Engine* game)
 				switch (event.key.keysym.sym)
 				 {
 					case SDLK_ESCAPE:
+                        net.disconnect();
 						game->Quit();
 						break;
 
@@ -184,8 +184,8 @@ net.send();
 //SDL_Delay(10);
 
 //duom = net.listen();
-duom = "2 1 1 200 500 0 0 0 0 2 1 325 50";
-//cout<<"Gauti data:   "<<duom<<endl;
+duom = "3 1 1 200 500 0 0 0 0 2 1 325 50 0 0 0 0 7 1 700 500";
+cout<<"Gauti data:   "<<duom<<endl;
 
 //D.temp_vec.clear();
 D.parse(duom);
@@ -199,32 +199,42 @@ if(D.RT.size()> 0 )
 {
     for( int i = 0; i < D.RT.size(); i++)
     {
+        cout<<"Yra tanku: "<<tankai.size()<<endl;
         if(!ArYra(D.RT[i]->ID))//tikriname ar tankas u duotuoju id yra sarase jei nera pridedame
         {
-            //Tankas* tk= NULL;
-            //tk = new Tankas(D.RT[i]->ID, D.RT[i]->X, D.RT[i]->Y);
-            //tankai.push_back(tk);
+            Tankas* tk= NULL;
+            tk = new Tankas(data, D.RT[i]->ID, D.RT[i]->X, D.RT[i]->Y);
+            tankai.push_back(tk);
         }
 
+        cout<<"Yra tanku after: "<<tankai.size()<<endl;
         for(int j = 0; j<tankai.size(); j++)
         {
-            cout<<"Tanko ID: "<<tankai[j]->GetID()<<" Gautas ID: "<<D.RT[i]->ID<<endl;
+            cout<<"Tanko ID: "<<tankai[j]->GetID()<<"Gautas ID: "<<D.RT[i]->ID<<endl;
             if(tankai[j]->GetID() == D.RT[i]->ID)
                 {
                     tankai[j]->SendXY(D.RT[i]->X, D.RT[i]->Y);
                     break;
                 }
         }
-
-
-         // Xg = D.RT[i]->X;
-          //Yg = D.RT[i]->Y;
     }
 
+     //std::cin>>Xg;
     cout<<"koordinates X="<<Xg<<" Y="<<Yg<<"."<<endl;
    // Xg = D.RT[0]->X;
     //Xg = D.RT[0]->Y;
 }
+ if(D.RT.size()>1)
+ {
+     Xg = D.RT[0]->X;
+     Yg = D.RT[0]->Y;
+
+     Xg1 = D.RT[1]->X;
+     //cout<<"ID: "<<D.RT[1]->ID<<endl;
+    // cout<<"X1: "<<Xg1<<endl;
+     Yg1 = D.RT[1]->Y;
+     //cout<<"Y1: "<<Yg1<<endl;
+ }
 
 /*string kiekT;//kiek tanku
 
@@ -308,23 +318,23 @@ cout<<"X koordinate: "<<Xgautas <<". Y koordinate: "<<Ygautas<<"."<<endl;
 
 //-------------------------------------
 /*Atnaujiname visus tankus*/
-
     tmp = tankai.size();
     if(tmp!=0)
     for(int i = 0; i < tmp; i++)
     {
         if(!(tankai[i]->GetBusena()))
+        {
            tankai.erase(tankai.begin()+i);
+        }
     }
 
 
-    tmp = tankai.size();
     if(tmp!=0)
-    for(int i = 0; i < tmp; i++)
+    for(int i = 1; i < tmp; i++)
     {
         tankai[i]->atnaujinti(px, py, kulkos);
     }
-
+    tankai[0]->atnaujinti(px, py, kulkos);
     //tankai[1]->atnaujinti(Xg, Ygautas, kulkos);
    //tankai[1]->atnaujinti(700, 350, kulkos);
   /*
@@ -350,12 +360,12 @@ cout<<"X koordinate: "<<Xgautas <<". Y koordinate: "<<Ygautas<<"."<<endl;
             if( SDL_CollidePixel( tankai[j]->rotation ,tankai[j]->getX()  , tankai[j]->getY(),kulkos[i]->KPasukta , kulkos[i]->GetX()  , kulkos[i]->GetY()) != 0)
             {
                // anim.AddBum(kulkos[i]->GetX()+10, kulkos[i]->GetY()+10);               //pridedame sprogimo animacija
+               // delete(kulkos[ kulkos.begin()+ i ] );
                 kulkos.erase( kulkos.begin()+ i );                                     //istriname kulka is saraso
                 break;
             }
 
     }
-
 //-------------------------------------
 if(!upup)
     {

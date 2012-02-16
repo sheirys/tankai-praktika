@@ -5,7 +5,7 @@
 #include <iostream>
 #include <map>
 
-#include <SDL/SDL_image.h>
+#include "SDL/SDL_image.h"
 using namespace std;
 class ImageLoader
 {

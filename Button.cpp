@@ -15,7 +15,7 @@ void Button::set(int y, int h, int w, std::string tekstas)
     Y=y;
     H=h;
     W=w;
-    SDL_Surface* temp1 = SDL_LoadBMP("intro.bmp");
+    SDL_Surface* temp1 = SDL_LoadBMP("data/img/intro.bmp");
     SDL_Surface* temp = SDL_DisplayFormat(temp1);
     SDL_FreeSurface(temp1);
 

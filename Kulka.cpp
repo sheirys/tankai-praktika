@@ -13,7 +13,7 @@ Kulka::~Kulka()
 }
 bool Kulka::begin()
 {
-    Klk = Load::load_img("kulka.png");
+    Klk = Load::load_img("data/img/kulka.png");
     KPasukta=rotozoomSurface(Klk,kampas,0.75,0);
     return true;
 }

@@ -1,8 +1,8 @@
 #ifndef _INTRO_H_
     #define _INTRO_H_
 
-#include "SDL/SDL.h"
-#include "SDL/SDL_mixer.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_mixer.h>
 #include "Busena.h"
 #include "Meniu.h"
 

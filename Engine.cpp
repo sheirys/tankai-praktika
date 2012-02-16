@@ -18,13 +18,16 @@ void Engine::Init(const char* title, int width, int height,	int bpp, bool fullsc
 	}
 
     //inicijuojame ekrana
-	screen = SDL_SetVideoMode(width, height, bpp, flags);
+	screen = SDL_SetVideoMode(width, height, bpp, flags | SDL_HWSURFACE);
 
 	m_fullscreen = fullscreen;
 
 	m_running = true;
 
 	std::cout<<("Zaidimo varikliukas veikia!\n");
+	const SDL_VideoInfo* myPointer = SDL_GetVideoInfo();
+	int y = myPointer->hw_available;
+    std::cout<<"HARDWARE AVAILABLE: "<<y<<std::endl;
 }
 //-----------------------------------------------------------------------------
 //Isvalomos visos busenu klases

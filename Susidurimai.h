@@ -2,8 +2,8 @@
     #define _SUSIDURIMAI_H_
 
     #include <assert.h>
-    #include <SDL/SDL.h>
-    #include <SDL/SDL_image.h>
+    #include "SDL/SDL.h"
+    #include "SDL/SDL_image.h"
 
 int SDL_CollideTransparentPixel(SDL_Surface *surface , int u , int v);
 

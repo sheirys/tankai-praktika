@@ -15,14 +15,18 @@
 #include "Kulka.h"
 #include "Susidurimai.h"
 
+
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_rotozoom.h>
 #include <SDL/SDL_mixer.h>
 
+class data_loader;
+
 using std::vector;
 class Tankas
 {
+
     private:
         int ID;//Tanko id. Kiekvienas turi unikalu id
         bool gyvas;//ar tankas egzistuoja
@@ -62,7 +66,8 @@ class Tankas
         //Surface, kuri grazina
         SDL_Surface*   rotation;
 
-        Tankas(int ID = 0,  int x =50, int y=50, double angle=0);
+        Tankas(data_loader &data, int ID = 0,  int x =50, int y=50, double angle=0);
+        Tankas();
         void veiksmas(int kur, int mode, int xp, int yp);
         void Inicijuoti();
         void Sauti();

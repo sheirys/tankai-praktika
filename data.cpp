@@ -8,13 +8,10 @@
 
 using namespace std;
 
-void data_loader::getImg( char* id, SDL_Surface* destination) {
+void data_loader::getImg( char* id, SDL_Surface* surface) {
 
-	for (int i=0; i< images.size(); i++ ) {
-		if ( images[i].id == id ) {
-			apply_surface(0, 0, images[i].IMG, destination, NULL);
-		}
-	}
+
+
 }
 
 // tikrinam ar galim vaziuot i x,y koordinates

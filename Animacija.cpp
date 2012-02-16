@@ -49,7 +49,7 @@ Animacija::Animacija(ImageLoader& anim)
     }
 
     SDL_FreeSurface(temp);
-   // delete temp;
+    delete temp;
 
 }
 
