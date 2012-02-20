@@ -65,7 +65,7 @@ void Game::Resume()
 
 void Game::HandleEvents(Engine* game)
 {
-    kiekP++;
+    //kiekP++;
     //std::ostringstream temp;
     //temp<<kiekP;
 
@@ -148,8 +148,8 @@ void Game::HandleEvents(Engine* game)
 					    	upde=false;
 					    	break;
 					}
-					break;
 				}
+				break;
 			}
 
              		case SDL_KEYUP:
